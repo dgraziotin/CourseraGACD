@@ -1,4 +1,4 @@
-run_analysis <- function( dataDir ) {
+run_analysis <- function( data.dir ) {
 
     ## 0. Load some convenience functions
 
@@ -7,11 +7,11 @@ run_analysis <- function( dataDir ) {
 
     ## 1. Merge traning data and test data into one data set
 
-    data <- mergeData( dataDir )
+    data <- mergeData( data.dir )
 
     ## 2. Load the feature index and select a subset of features from the data
 
-    fi <- featuresIndex( dataDir, select = "mean|std", ignore = "BodyBody" ) 
+    fi <- featuresIndex( data.dir, select = "mean|std", ignore = "BodyBody" ) 
 
     data.sub <- data[, c( 1, 2, fi$index + 2 ) ]
 
@@ -19,41 +19,33 @@ run_analysis <- function( dataDir ) {
 
     colnames(data.sub) <- c( "subject", "activity", fi$feature.name )
 
-    ## Read activity labels
+    ## 4. Use descriptive activity labels in place of the numeric values
 
-    activity.labels.filename   <- file.path( dataDir, "activity_labels.txt" )
+    ## 4.1 Read activity labels
+
+    activity.labels.filename   <- file.path( data.dir, "activity_labels.txt" )
 
     activity.labels <- read.table( activity.labels.filename, 
                                    colClasses = c( "integer", "character" ) )
 
-    ## 4. Use descriptive activity labels in place of the numeric values
+    ## 4.2 Substitue the descriptive activity labels in place of the 
+    ##     numeric values
 
-     data.sub$activity <- apply( data.sub, 1, 
+    data.sub$activity <- apply( data.sub, 1, 
                                  function(x) activity.labels[x[2],2] )
 
     ## 5. Create a tidy data set with average of each variable for 
     ##    each activity and each subject
 
-    ## Make an ordered list of the unique combinations of subject and activity
+    data.melt <- melt( data.sub, c("subject","activity") )
 
-    trials <- unique( data.sub[, c( 'subject', 'activity' ) ] )
+    data.tidy <- dcast( data.melt, ... ~ variable, mean )
 
-    trials <- trials[order(trials$subject),]
+    ## 5.1 Output the tidy data frame
 
-    ## Create the tiny data frame
+    write.table( data.tidy, "tidy.txt", row.names = F )
 
-    tidy.data <- data.sub[1:nrow(trials),]
+    ## 5.2 Return the tidy data frame for further use
 
-    for ( t in seq_len( nrow( trials ) ) ) {
-        trial <- data.sub[data.sub$subject == trials[t,1] &
-                          data.sub$activity == trials[t,2], ]
-
-        trial.means <- colMeans( trial[,3:ncol(trial)] )
-
-        tidy.data[t,1] <- trials[t,1]
-        tidy.data[t,2] <- trials[t,2]
-        tidy.data[t,3:ncol(trial)] <- trial.means
-    }
-
-    return( tidy.data )
+    return( data.tidy )
 }
