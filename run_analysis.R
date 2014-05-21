@@ -1,3 +1,12 @@
+## The main entry point to the analysis.
+##
+## input: data.dir - directory containing the UCI HAR dataset. The default is
+##                   the current working directory.
+##        output.filename - name of the output file. Default is "tidy.txt"
+##
+## output: a data frame containing the tidy data. Additionally the tidy data
+##         is written to disk
+
 RunAnalysis <- function( data.dir = ".", output.filename = "tidy.txt" ) {
 
     ## 0. Make sure needed libraries are loaded

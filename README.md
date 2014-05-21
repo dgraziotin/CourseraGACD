@@ -53,5 +53,5 @@ load_data.R | An R script to load data from the subdirectories
 features.R | An R script to load the feature index and select the ones desired
 CodeBook.md | The Code Book describing the data, especially the tidy data.
 README.md | The file.
-LICENSE | A software license giving the user the freedom to use the code.
+LICENSE | A free software license giving the user the freedom to use the code.
 tidy.txt | Example output file.

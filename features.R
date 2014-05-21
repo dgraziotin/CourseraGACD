@@ -1,9 +1,12 @@
 ## This function loads the feature index from the "features.txt" file in the
 ## specified directory
 ##
-## The default is to load all features. With the select and ignore options one
-## choose a subset of features to load. Both select and ignore expect a regex
-## expression.
+## input: data.dir - directory containing the UCI HAR dataset
+##        select   - a regex expression selecting the features of interest
+##        ignore   - a regex expression to drop some of the selected features
+##
+## output: a data frame with the feature index in column 1 and a human 
+##         readable description in column 2.
 
 FeaturesIndex <- function( data.dir, select = ".", ignore = "~" ) {
 
