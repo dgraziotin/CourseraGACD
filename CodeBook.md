@@ -25,15 +25,32 @@ were identified by having the components, `mean()` and `std()`, in their names.
 The raw data also contained features whose names violated the naming 
 conventions in the description files. As the meaning of
 variables containing the name component `BodyBody` was not clear, all such
-variables were also disgarded in creating the tidy data set.
+variables were also discarded in creating the tidy data set.
 
 ##Code book
 
-The naming convention for the data variables follows the 
-[Google style guide](https://google-styleguide.googlecode.com/svn/trunk/Rguide.xml).
+The naming convention for the data variables follows the industry standard
+[Google style guide](https://google-styleguide.googlecode.com/svn/trunk/Rguide.xml). In particular a period, `.`, is used to separate name components. 
 
-**NOTE**: As usual, features for machine learning algorithms are unitless 
-and have been normalized to the range `[-1,1]`.
+To prevent the variable names from becoming too long the following 
+abbreviations are incorporated into the names.
+
+
+abbreviation |  full name
+:----------|:---------
+t | time domain
+f | frequency domain
+body | body fixed reference frame
+gravity | Earth fixed reference frame
+acc | accelerometer reading
+gyro | Gyroscope reading
+mag | Euclidean magnitude
+std | Standard Deviation
+
+
+
+**NOTE**: As usual, features for machine learning algorithms are dimensionless 
+and normalized to the range `[-1,1]`.
 
 
 ###Identifiers
@@ -45,6 +62,8 @@ name       |  type     | description
 :----------|:---------:|:-----------
 subject    | integer   | id assigned to the test person
 activity   | character | activity the test person was performing
+
+The raw data set contained 30 subjects each performing 6 activities.
 
 
 ###Time Domain Signals
@@ -134,7 +153,7 @@ t.body.gyro.jerk.mag.std | numeric | standard deviation Euclidean magnitude
 ###Frequency Domain Signals
 
 The frequency domain signals are obtain by apply a Fast Fourier Transform (FFT)
-to the the time domain signals.  All frequency domain signals are prefixed 
+to the time domain signals.  All frequency domain signals are prefixed 
 by a single *f*.
 
 
