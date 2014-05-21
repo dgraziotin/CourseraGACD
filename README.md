@@ -24,7 +24,7 @@ working directory.) As **output** it creates a file containing the tidy data.
 
 `RunAnalysis` performs the following steps:
 
-1. Calls `loadData` to load the training data and test data into separate 
+1. Calls `LoadData` to load the training data and test data into separate 
    data frames and then merges them into a single data frame.
 2. Calls `FeaturesIndex` to load the features index and select the desired
    subset of features.  (See the [Code Book](CodeBook.md) for more details 
