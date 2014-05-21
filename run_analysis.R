@@ -13,7 +13,10 @@ RunAnalysis <- function( data.dir = ".", output.filename = "tidy.txt" ) {
 
     ## 1. Merge traning data and test data into one data set
 
-    data <- MergeData( data.dir )
+    data.train <- LoadData( data.dir, "train" )
+    data.test  <- LoadData( data.dir, "test" )
+
+    data <- rbind( data.train, data.test )
 
     ## 2. Load the feature index and select a subset of features from the data
 
