@@ -1,4 +1,4 @@
-mergeData <- function( data.dir ) {
+MergeData <- function( data.dir ) {
 
     ## Load the training data
 

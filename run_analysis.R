@@ -1,4 +1,4 @@
-run_analysis <- function( data.dir = ".", output.filename = "tidy.txt" ) {
+RunAnalysis <- function( data.dir = ".", output.filename = "tidy.txt" ) {
 
     ## 0. Make sure needed libraries are loaded
 
@@ -9,15 +9,15 @@ run_analysis <- function( data.dir = ".", output.filename = "tidy.txt" ) {
     ## 0.1 Load some convenience functions
 
     source("features.R")
-    source("mergeData.R")
+    source("merge_data.R")
 
     ## 1. Merge traning data and test data into one data set
 
-    data <- mergeData( data.dir )
+    data <- MergeData( data.dir )
 
     ## 2. Load the feature index and select a subset of features from the data
 
-    fi <- featuresIndex( data.dir, select = "mean|std", ignore = "BodyBody" ) 
+    fi <- FeaturesIndex( data.dir, select = "mean|std", ignore = "BodyBody" ) 
 
     data.sub <- data[, c( 1, 2, fi$index + 2 ) ]
 

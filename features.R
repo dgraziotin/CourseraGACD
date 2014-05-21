@@ -5,13 +5,13 @@
 ## choose a subset of features to load. Both select and ignore expect a regex
 ## expression.
 
-featuresIndex <- function( data.dir, select = ".", ignore = "~" ) {
+FeaturesIndex <- function( data.dir, select = ".", ignore = "~" ) {
 
     ## load the index of features
 
-    featuresListFilename <- file.path( data.dir, "features.txt" )
+    features.list.filename <- file.path( data.dir, "features.txt" )
 
-    fl <- read.table( featuresListFilename, 
+    fl <- read.table( features.list.filename, 
                       colClasses = c( "integer", "character" ) )
 
     ## find the features of interest
