@@ -1,6 +1,12 @@
-run_analysis <- function( data.dir ) {
+run_analysis <- function( data.dir = ".", output.filename = "tidy.txt" ) {
 
-    ## 0. Load some convenience functions
+    ## 0. Make sure needed libraries are loaded
+
+    if ( !require( reshape2, quietly = TRUE ) ) {
+        stop( "Could not load package 'reshape2'." )
+    }
+
+    ## 0.1 Load some convenience functions
 
     source("features.R")
     source("mergeData.R")
@@ -43,7 +49,7 @@ run_analysis <- function( data.dir ) {
 
     ## 5.1 Output the tidy data frame
 
-    write.table( data.tidy, "tidy.txt", row.names = F )
+    write.table( data.tidy, output.filename, row.names = F )
 
     ## 5.2 Return the tidy data frame for further use
 
